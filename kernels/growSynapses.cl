@@ -53,7 +53,6 @@ kernel void growSynapses(global int* restrict x, global bool* restrict y, global
 		for(int j=local_id;j<NUM_INPUT_BITS;j+=local_size)
 			connection_list[j] = false;
 
-		int local_min = MAX_SYNAPSE_PER_CELL;
 		for(int j=local_id;j<MAX_SYNAPSE_PER_CELL;j+=local_size) {
 			int idx = synapses[j];
 			if(idx == -1) {
