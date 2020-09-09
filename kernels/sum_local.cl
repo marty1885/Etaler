@@ -25,6 +25,7 @@
 //chunk_size: for each chunk_size elements, produce 1 sum
 //local_size: must equal to WORKITEM_PER_CU
 //group_size: must equal to in_size/chunk_size
+__attribute__ ((reqd_work_group_size(WORKITEM_PER_CU, 1, 1)))
 kernel void sum(global InType* restrict x, global OutType* restrict y, int in_size, int chunk_size)
 {
         local IntermidType local_sum[WORKITEM_PER_CU];
