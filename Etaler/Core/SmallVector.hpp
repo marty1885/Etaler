@@ -335,8 +335,8 @@ public:
 /// This class consists of common code factored out of the SmallVector class to
 /// reduce code duplication based on the SmallVector 'N' template parameter.
 template <typename T>
-class SmallVectorImpl : public SmallVectorTemplateBase<T, std::is_pod<T>::value> {
-  typedef SmallVectorTemplateBase<T, std::is_pod<T>::value > SuperClass;
+class SmallVectorImpl : public SmallVectorTemplateBase<T, std::is_standard_layout<T>::value && std::is_trivial<T>::value> {
+  typedef SmallVectorTemplateBase<T, std::is_standard_layout<T>::value && std::is_trivial<T>::value > SuperClass;
 
   SmallVectorImpl(const SmallVectorImpl&) = delete;
 public:
@@ -347,7 +347,7 @@ public:
 protected:
   // Default ctor - Initialize to empty.
   explicit SmallVectorImpl(unsigned N)
-    : SmallVectorTemplateBase<T, std::is_pod<T>::value>(N*sizeof(T)) {
+    : SmallVectorTemplateBase<T, std::is_standard_layout<T>::value && std::is_trivial<T>::value>(N*sizeof(T)) {
   }
 
 public:
