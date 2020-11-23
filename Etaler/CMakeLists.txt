@@ -28,6 +28,7 @@ else()
 endif()
 
 if(ETALER_ENABLE_OPENCL)
+	message(STATUS "OpenCL backend enabled")
 	target_sources(Etaler PRIVATE Backends/OpenCLBackend.cpp)
 
 	if(NOT APPLE)
@@ -57,11 +58,11 @@ install(FILES ${CMAKE_SOURCE_DIR}/cmake/FindEtaler.cmake
 	DESTINATION share/Etaler COMPONENT cmake)
 
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/Etaler
-    DESTINATION include
-    FILES_MATCHING PATTERN "*.hpp")
+	DESTINATION include
+	FILES_MATCHING PATTERN "*.hpp")
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/Etaler
-    DESTINATION include
-    FILES_MATCHING PATTERN "*.h")
+	DESTINATION include
+	FILES_MATCHING PATTERN "*.h")
 
 
 install(FILES ${PROJECT_BINARY_DIR}/Etaler_export.h DESTINATION include)
